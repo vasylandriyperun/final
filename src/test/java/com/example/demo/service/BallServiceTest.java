@@ -47,7 +47,7 @@ public class BallServiceTest {
         Ball newBall = new Ball();
         newBall.setSize(10);
         newBall.setWeight(22.5F);
-        Ball ball1 = new Ball(1L,   2, 3F);
+        Ball ball1 = new Ball(1L, 2, 3F);
         when(repository.findById(1L)).thenReturn(Optional.of(ball1));
         //when:
         service.updateBall(1L, newBall);
@@ -57,4 +57,15 @@ public class BallServiceTest {
         assertEquals(ball1.getWeight(), (newBall.getWeight()));
     }
 
+    @Test
+    void updateBallShouldThrowExceptionIfIdDoesNotExist() {
+        //given
+        Ball newBall = new Ball();
+        newBall.setSize(10);
+        newBall.setWeight(22.5F);
+        when(repository.findById(1L)).thenReturn(Optional.empty());
+        //when
+        assertThrows(RuntimeException.class, () -> service.updateBall(1L, newBall));
+
+    }
 }
