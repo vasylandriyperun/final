@@ -8,4 +8,8 @@ import java.util.List;
 public interface BallRepository extends JpaRepository<Ball, Long> {
 
     List<Ball> findBySizeGreaterThanAndWeightGreaterThan(Integer size, Float weight);
+
+    List<Ball> findAllByOrderByWeightDesc();
+
+    List<Ball> findAllByOrderBySizeAsc();
 }
